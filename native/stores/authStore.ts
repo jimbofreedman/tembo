@@ -1,5 +1,6 @@
 import * as SecureStore from 'expo-secure-store';
 import Constants from 'expo-constants';
+import * as Facebook from "expo-facebook";
 
 import { observable, action, computed } from 'mobx';
 import axios from 'axios';
@@ -18,12 +19,15 @@ export default class AuthStore {
             baseURL: `${Constants.manifest.extra.apiUrl}`,
         });
 
-        // if (__DEV__) {
-        //   this.httpClient.interceptors.request.use(request => {
-        //     console.log('AuthStore HTTP Request:', request);
-        //     return request;
-        //   });
-        // }
+        if (__DEV__) {
+          this.httpClient.interceptors.request.use(request => {
+            console.log('AuthStore HTTP Request:', request);
+            return request;
+          });
+        }
+
+        SecureStore.getItemAsync('apiToken').then(t => { this.apiToken = t });
+        Facebook.initializeAsync(Constants.manifest.extra.facebook.appId).then(() => {});
     }
 
     @action.bound async checkLoggedIn() {
@@ -65,6 +69,42 @@ export default class AuthStore {
                         throw new Error('Unknown login error', error);
                 }
             });
+    }
+
+    @action.bound
+    async loginFacebook() {
+        try {
+            const {
+                type,
+                token,
+                /*        expires,
+                permissions,
+                declinedPermissions, */
+            } = await Facebook.logInWithReadPermissionsAsync({
+                permissions: ['public_profile', 'email'],
+            });
+            if (type === 'success') {
+                console.log(Constants.manifest.extra);
+                const params = {
+                    client_id: Constants.manifest.extra.facebook.clientId,
+                    client_secret: Constants.manifest.extra.facebook.clientSecret,
+                    grant_type: 'convert_token',
+                    backend: 'facebook',
+                    token,
+                };
+
+                const response = await this.httpClient.post(
+                    `${Constants.manifest.extra.apiUrl}/auth/convert-token`,
+                    params
+                );
+                this.apiToken = response.data.data.access_token;
+                SecureStore.setItemAsync('apiToken', this.apiToken);
+            } else {
+                // type === 'cancel'
+            }
+        } catch (error) {
+            console.log(`Facebook Login Error: ${error}`);
+        }
     }
 
     @action.bound async logout() {

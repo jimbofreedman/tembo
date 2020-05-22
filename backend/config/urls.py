@@ -25,6 +25,7 @@ urlpatterns += [
     path("api/", include("config.api_router")),
     # DRF auth token
     path("auth-token/", obtain_auth_token),
+    path("auth/", include('rest_framework_social_oauth2.urls')),
 ]
 
 if settings.DEBUG:

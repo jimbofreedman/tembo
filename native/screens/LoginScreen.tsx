@@ -38,6 +38,9 @@ export default function LoginScreen() {
                 <Button primary onPress={submit}>
                     <Text>Login</Text>
                 </Button>
+                <Button onPress={authStore.loginFacebook}>
+                    <Text>Login with Facebook</Text>
+                </Button>
 
                 <SnackBar position="top" visible={showSnackbar} textMessage={snackbarMessage} />
             </Form>
