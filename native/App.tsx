@@ -9,7 +9,7 @@ import {observer} from "mobx-react";
 
 Sentry.init({
     dsn: 'https://b09775658d1147bdac9f7eb190030070@o396764.ingest.sentry.io/5250612',
-    enableInExpoDevelopment: true,
+    enableInExpoDevelopment: false,
     debug: true
 });
 
