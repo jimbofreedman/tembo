@@ -25,4 +25,4 @@ djangorestframework==3.11.0  # https://github.com/encode/django-rest-framework
 # Tembo
 # ------------------------------------------------------------------------------
 django-model-utils==4.0.0  # https://github.com/jazzband/django-model-utils
-
+djangorestframework-jsonapi==3.1.0   # https://github.com/django-json-api/django-rest-framework-json-api
