@@ -1,12 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { Container, Text, Button } from 'native-base';
+import useStores from "../hooks/useStores";
 
 export default function HomeScreen() {
-
+const { authStore } = useStores();
     return (
-        <View style={styles.container}>
+        <Container>
             <Text>Open up App.tsx to start working on your app!</Text>
-        </View>
+            <Button onPress={authStore.logout} title="Logout"><Text>Logout</Text></Button>
+        </Container>
     );
 }
 
