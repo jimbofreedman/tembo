@@ -1,6 +1,7 @@
 import * as SecureStore from 'expo-secure-store';
 import Constants from 'expo-constants';
 import * as Facebook from "expo-facebook";
+import * as Google from 'expo-google-app-auth';
 
 import { observable, action, computed } from 'mobx';
 import axios from 'axios';
@@ -105,6 +106,48 @@ export default class AuthStore {
         } catch (error) {
             console.log(`Facebook Login Error: ${error}`);
         }
+    }
+
+    @action.bound
+    async loginGoogle() {
+        try {
+            const config = {
+                androidClientId: "837901818162-5566r7va6bpfkk0npfb8c5up1igau07d.apps.googleusercontent.com",
+                iosClientId: "837901818162-oqh6u87cg4kjbe8ut6og3asqjb9rupde.apps.googleusercontent.com",
+                scopes: ["profile", "email"],
+            };
+            const {
+                type,
+                accessToken,
+                user
+            } = await Google.logInAsync(config);
+            if (type === 'success') {
+                console.log("success!", accessToken, user)
+                this.finishLoginOAuth('google-oauth2', accessToken);
+            } else {
+                // type === 'cancel'
+                console.log("cancelled");
+            }
+        } catch (error) {
+            console.log(`Google Login Error: ${error}`);
+        }
+    }
+
+    @action.bound async finishLoginOAuth(backend, token) {
+        const params = {
+            client_id: Constants.manifest.extra[backend].clientId,
+            client_secret: Constants.manifest.extra[backend].clientSecret,
+            grant_type: 'convert_token',
+            backend,
+            token,
+        };
+
+        const response = await this.httpClient.post(
+            `${Constants.manifest.extra.apiUrl}/auth/convert-token`,
+            params
+        );
+        this.apiToken = response.data.access_token;
+        SecureStore.setItemAsync('apiToken', this.apiToken);
     }
 
     @action.bound async logout() {

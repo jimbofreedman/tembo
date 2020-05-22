@@ -41,6 +41,9 @@ export default function LoginScreen() {
                 <Button onPress={authStore.loginFacebook}>
                     <Text>Login with Facebook</Text>
                 </Button>
+                <Button onPress={authStore.loginGoogle}>
+                    <Text>Login with Google</Text>
+                </Button>
 
                 <SnackBar position="top" visible={showSnackbar} textMessage={snackbarMessage} />
             </Form>

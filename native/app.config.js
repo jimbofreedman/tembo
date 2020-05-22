@@ -8,6 +8,10 @@ module.exports = ({ config }) => {
         clientId: process.env.FACEBOOK_CLIENT_ID,
         clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
       },
+      'google-oauth2': {
+        clientId: process.env.GOOGLE_OAUTH2_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_OAUTH2_CLIENT_SECRET,
+      },
     },
   };
 };
