@@ -5,7 +5,7 @@
     "android": "dotenv -e .env expo start --android",
     "ios": "dotenv -e .env expo start --ios",
     "web": "dotenv -e .env expo start --web",
-    "publish": "dotenv -e .env.prod expo publish",
+    "build:publish": "dotenv -e .env.prod expo publish",
     "build:android": "dotenv -e .env.prod expo build:android",
     "build:ios": "dotenv -e .env.prod expo build:ios",
     "eject": "expo eject",
