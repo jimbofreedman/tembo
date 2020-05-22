@@ -1,21 +1,29 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web",
+    "start": "dotenv -e .env expo start",
+    "android": "dotenv -e .env expo start --android",
+    "ios": "dotenv -e .env expo start --ios",
+    "web": "dotenv -e .env expo start --web",
     "eject": "expo eject",
     "lint": "eslint '**/*.{js,ts,tsx}' --fix"
   },
   "dependencies": {
+    "@reststate/mobx": "^0.0.7",
     "@sentry/react-native": "^1.3.9",
+    "axios": "^0.19.2",
     "expo": "~37.0.3",
+    "expo-secure-store": "~8.1.0",
+    "mobx": "^5.15.4",
+    "mobx-react": "^6.2.2",
+    "native-base": "^2.13.12",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-37.0.1.tar.gz",
     "react-native-screens": "~2.2.0",
+    "react-native-snackbar-component": "^1.1.10",
     "react-native-web": "~0.11.7",
+    "react-navigation": "^4.3.9",
     "sentry-expo": "^2.0.4"
   },
   "devDependencies": {
@@ -25,6 +33,7 @@
     "@typescript-eslint/eslint-plugin": "^3.0.0",
     "@typescript-eslint/parser": "^3.0.0",
     "babel-preset-expo": "~8.1.0",
+    "dotenv-cli": "^3.1.0",
     "eslint": "^7.0.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.3",
