@@ -13,12 +13,12 @@ const httpClient = axios.create({
 
 const authStore = new AuthStore(httpClient);
 
-// if (__DEV__) {
-//   httpClient.interceptors.request.use(request => {
-//     console.log('HTTP Request:', request);
-//     return request;
-//   });
-// }
+if (__DEV__) {
+  httpClient.interceptors.request.use(request => {
+    console.log('HTTP Request:', request);
+    return request;
+  });
+}
 
 httpClient.interceptors.request.use(config => {
     const finalChar = config.url[config.url.length - 1];

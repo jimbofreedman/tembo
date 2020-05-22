@@ -12,6 +12,10 @@ export default class ProfileStore {
         this.httpClient = httpClient;
     }
 
+    get loaded() {
+        return !!this.data;
+    }
+
     @action.bound async load() {
         const loading = true;
         this.httpClient
@@ -19,6 +23,7 @@ export default class ProfileStore {
             .then(response => {
                 this.loading = false;
                 this.data = response.data.data;
+                console.log("Data", this.data);
             })
             .catch(error => {
                 this.loading = false;
