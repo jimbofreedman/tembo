@@ -15,6 +15,18 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "organization": "freedman-io",
+            "project": "tembo-native",
+            "authToken": "b96486a5d504409aaffb82d08b17c3fc339f6390eb624b32932f35104ab9c823"
+          }
+        }
+      ]
+    },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
