@@ -45,20 +45,24 @@ export default class AuthStore {
 
     @action.bound
     async loginEmailPassword(email, password) {
-        this.httpClient
+        return this.httpClient
             .post(`${Constants.manifest.extra.apiUrl}/auth-token/`, { username: email, password: password})
             .then((response) => {
                 console.log("Login success");
                 this.apiToken = response.data.token;
                 SecureStore.setItemAsync('apiToken', this.apiToken);
+                return true;
             })
             .catch((error) => {
-                console.log("Login failure", error.response.status, error)
+                console.log("Login failure", error)
+                if (!error.response) {
+                    throw new Error("Could not contact login server");
+                }
                 switch (error.response.status) {
                     case 400:
                         throw new Error('Incorrect e-mail address or password');
                     default:
-                        throw new Error('Unknown login error');
+                        throw new Error('Unknown login error', error);
                 }
             });
     }

@@ -13,12 +13,13 @@ export default function LoginScreen() {
     const [snackbarMessage, setSnackbarMessage] = React.useState('');
 
     const submit = () => {
-        console.log(email, password);
+        setShowSnackbar(false);
         authStore
             .loginEmailPassword(email, password)
-            .catch((message:string) => {
-                console.log(message);
+            .then((response) => console.log("then", response))
+            .catch((error) =>{
                 setShowSnackbar(true);
+                setSnackbarMessage(error.message);
             });
     }
 
@@ -38,7 +39,7 @@ export default function LoginScreen() {
                     <Text>Login</Text>
                 </Button>
 
-                <SnackBar visible={showSnackbar} textMessage={snackbarMessage} />
+                <SnackBar position="top" visible={showSnackbar} textMessage={snackbarMessage} />
             </Form>
         </Container>
     );
