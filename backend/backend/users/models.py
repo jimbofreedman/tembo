@@ -2,9 +2,9 @@ from django.contrib.auth.models import AbstractUser
 from django.db.models import CharField
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
+from model_utils.models import TimeStampedModel
 
-
-class User(AbstractUser):
+class User(AbstractUser, TimeStampedModel):
 
     # First Name and Last Name do not cover name patterns
     # around the globe.
