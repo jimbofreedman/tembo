@@ -328,6 +328,5 @@ backend/media/
 
 
 .ipython/
-.env
 .envs/*
 !.envs/.local/
