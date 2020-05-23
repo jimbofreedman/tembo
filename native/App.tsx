@@ -8,9 +8,10 @@ import useStores from './hooks/useStores';
 import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import { observer } from 'mobx-react';
+import Constants from "expo-constants";
 
 Sentry.init({
-    dsn: 'https://b09775658d1147bdac9f7eb190030070@o396764.ingest.sentry.io/5250612',
+    dsn: Constants.manifest.extra.sentryDSN,
     enableInExpoDevelopment: false,
     debug: true,
 });
