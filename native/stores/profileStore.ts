@@ -23,7 +23,7 @@ export default class ProfileStore {
             .then(response => {
                 this.loading = false;
                 this.data = response.data.data;
-                console.log("Data", this.data);
+                console.log("Loaded profile");
             })
             .catch(error => {
                 this.loading = false;

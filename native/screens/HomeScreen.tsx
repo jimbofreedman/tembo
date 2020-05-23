@@ -3,8 +3,9 @@ import { StyleSheet } from 'react-native';
 import { Container, Text, Button } from 'native-base';
 import useStores from "../hooks/useStores";
 import Loading from '../components/Loading';
+import {observer} from "mobx-react";
 
-export default function HomeScreen() {
+function HomeScreen() {
     const { authStore, profileStore } = useStores();
 
     React.useEffect(() => {
@@ -14,6 +15,7 @@ export default function HomeScreen() {
     });
 
     if (!profileStore.loaded) {
+        console.log(profileStore.loaded, profileStore.loading, profileStore.error);
         return <Container><Loading /></Container>
     }
 
@@ -24,6 +26,8 @@ export default function HomeScreen() {
         </Container>
     );
 }
+
+export default observer(HomeScreen);
 
 const styles = StyleSheet.create({
     container: {

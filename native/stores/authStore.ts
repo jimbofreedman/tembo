@@ -85,7 +85,6 @@ export default class AuthStore {
                 permissions: ['public_profile', 'email'],
             });
             if (type === 'success') {
-                console.log(Constants.manifest.extra);
                 const params = {
                     client_id: Constants.manifest.extra.facebook.clientId,
                     client_secret: Constants.manifest.extra.facebook.clientSecret,
@@ -122,11 +121,10 @@ export default class AuthStore {
                 user
             } = await Google.logInAsync(config);
             if (type === 'success') {
-                console.log("success!", accessToken, user)
                 this.finishLoginOAuth('google-oauth2', accessToken);
             } else {
                 // type === 'cancel'
-                console.log("cancelled");
+                console.log("Google login cancelled");
             }
         } catch (error) {
             console.log(`Google Login Error: ${error}`);
