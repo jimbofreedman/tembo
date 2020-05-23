@@ -14,13 +14,13 @@ const httpClient = axios.create({
 const authStore = new AuthStore(httpClient);
 
 if (__DEV__) {
-  httpClient.interceptors.request.use(request => {
-    console.log('HTTP Request:', request);
-    return request;
-  });
+    httpClient.interceptors.request.use((request) => {
+        console.log('HTTP Request:', request);
+        return request;
+    });
 }
 
-httpClient.interceptors.request.use(config => {
+httpClient.interceptors.request.use((config) => {
     const finalChar = config.url[config.url.length - 1];
 
     if (finalChar === '?') {
@@ -34,7 +34,7 @@ httpClient.interceptors.request.use(config => {
 });
 
 httpClient.interceptors.request.use(
-    config => {
+    (config) => {
         // eslint-disable-next-line no-param-reassign
         if (authStore.apiToken) {
             config.headers = {
@@ -46,7 +46,7 @@ httpClient.interceptors.request.use(
         }
         return config;
     },
-    error => Promise.reject(error)
+    (error) => Promise.reject(error),
 );
 
 export default React.createContext({

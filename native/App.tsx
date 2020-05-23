@@ -1,21 +1,20 @@
 import 'mobx-react/batchingForReactNative';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 
 import * as Sentry from 'sentry-expo';
-import useStores from "./hooks/useStores";
-import HomeScreen from "./screens/HomeScreen";
-import LoginScreen from "./screens/LoginScreen";
-import {observer} from "mobx-react";
+import useStores from './hooks/useStores';
+import HomeScreen from './screens/HomeScreen';
+import LoginScreen from './screens/LoginScreen';
+import { observer } from 'mobx-react';
 
 Sentry.init({
     dsn: 'https://b09775658d1147bdac9f7eb190030070@o396764.ingest.sentry.io/5250612',
     enableInExpoDevelopment: false,
-    debug: true
+    debug: true,
 });
 
 function App() {
-    const { authStore }  = useStores();
+    const { authStore } = useStores();
 
     return authStore.isLoggedIn ? <HomeScreen /> : <LoginScreen />;
 }

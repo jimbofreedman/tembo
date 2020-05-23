@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import { Container, Form, Item, Label, Input, Button } from 'native-base';
-import SnackBar from 'react-native-snackbar-component'
+import SnackBar from 'react-native-snackbar-component';
 
-import useStores from "../hooks/useStores";
-import Constants from "expo-constants";
+import useStores from '../hooks/useStores';
+import Constants from 'expo-constants';
 
-export default function LoginScreen() {
+export default function LoginScreen(): React.ReactNode {
     const { authStore } = useStores();
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
@@ -17,19 +17,19 @@ export default function LoginScreen() {
         setShowSnackbar(false);
         authStore
             .loginEmailPassword(email, password)
-            .then((response) => console.log("then", response))
-            .catch((error) =>{
+            .then((response) => console.log('then', response))
+            .catch((error) => {
                 setShowSnackbar(true);
                 setSnackbarMessage(error.message);
             });
-    }
+    };
 
     return (
         <Container>
             <Form>
                 <Item floatingLabel>
                     <Label>E-mail address</Label>
-                    <Input value={email} onChangeText={(text) => setEmail(text)}  />
+                    <Input value={email} onChangeText={(text) => setEmail(text)} />
                 </Item>
                 <Item floatingLabel last>
                     <Label>Password</Label>

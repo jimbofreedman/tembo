@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Container, Text, Button } from 'native-base';
-import useStores from "../hooks/useStores";
+import useStores from '../hooks/useStores';
 import Loading from '../components/Loading';
-import {observer} from "mobx-react";
+import { observer } from 'mobx-react';
 
-function HomeScreen() {
+function HomeScreen(): React.ReactNode {
     const { authStore, profileStore } = useStores();
 
     React.useEffect(() => {
@@ -16,13 +16,19 @@ function HomeScreen() {
 
     if (!profileStore.loaded) {
         console.log(profileStore.loaded, profileStore.loading, profileStore.error);
-        return <Container><Loading /></Container>
+        return (
+            <Container>
+                <Loading />
+            </Container>
+        );
     }
 
     return (
         <Container>
             <Text>Hi {profileStore.data.attributes.email}</Text>
-            <Button onPress={authStore.logout} title="Logout"><Text>Logout</Text></Button>
+            <Button onPress={authStore.logout} title="Logout">
+                <Text>Logout</Text>
+            </Button>
         </Container>
     );
 }
