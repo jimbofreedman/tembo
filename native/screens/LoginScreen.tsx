@@ -4,6 +4,7 @@ import { Container, Form, Item, Label, Input, Button } from 'native-base';
 import SnackBar from 'react-native-snackbar-component'
 
 import useStores from "../hooks/useStores";
+import Constants from "expo-constants";
 
 export default function LoginScreen() {
     const { authStore } = useStores();
@@ -44,6 +45,8 @@ export default function LoginScreen() {
                 <Button onPress={authStore.loginGoogle}>
                     <Text>Login with Google</Text>
                 </Button>
+
+                <Text>API: {Constants.manifest.extra.apiUrl}</Text>
 
                 <SnackBar position="top" visible={showSnackbar} textMessage={snackbarMessage} />
             </Form>

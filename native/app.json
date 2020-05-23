@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "native",
-    "slug": "native",
+    "name": "Tembo",
+    "slug": "tembo",
     "platforms": [
       "ios",
       "android",
@@ -34,7 +34,12 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "io.freedman.tembo.app",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "io.freedman.tembo.app",
+      "versionCode": 10000
     }
   }
 }

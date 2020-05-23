@@ -2,6 +2,7 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "dotenv -e .env expo start",
+    "start:prod": "dotenv -e .env.prod expo start",
     "android": "dotenv -e .env expo start --android",
     "ios": "dotenv -e .env expo start --ios",
     "web": "dotenv -e .env expo start --web",
