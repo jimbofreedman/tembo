@@ -49,3 +49,7 @@ EMAIL_BACKEND = "django.core.mail.backends.locmem.EmailBackend"
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+SOCIAL_AUTH_FACEBOOK_KEY = None
+SOCIAL_AUTH_FACEBOOK_SECRET = None
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = None
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = None
