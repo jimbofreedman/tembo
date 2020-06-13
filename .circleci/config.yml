@@ -52,17 +52,17 @@ jobs:
           key: *web_cache_key
           paths:
             - "node_modules"
-      - run: yarn run lint
+#      - run: yarn run lint
       - run: yarn run build
-#      - aws-s3/sync:
-#          from: build
-#          to: 's3://mybucket/'
-#          overwrite: true
-#          aws-access-key-id: AWS_ACCESS_KEY
-#          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-#          aws-region: AWS_DEFAULT_REGION
-#          arguments: |
-#            --cache-control "max-age=86400"
+      - aws-s3/sync:
+          from: build
+          to: 's3://freedman-io-tembo/'
+          overwrite: true
+          aws-access-key-id: AWS_ACCESS_KEY
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          aws-region: AWS_DEFAULT_REGION
+          arguments: |
+            --cache-control "max-age=86400"
 
 workflows:
   version: 2
