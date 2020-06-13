@@ -4,7 +4,7 @@ import { AxiosInstance } from 'axios';
 import config from '../config';
 
 export default class ProfileStore {
-    httpClient:AxiosInstance;
+    httpClient: AxiosInstance;
 
     @observable loading = false;
 
@@ -12,7 +12,7 @@ export default class ProfileStore {
         id: null,
         attributes: {
             email: null,
-        }
+        },
     };
     @observable error = null;
 

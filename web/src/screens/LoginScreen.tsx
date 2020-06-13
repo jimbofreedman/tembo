@@ -1,15 +1,15 @@
 import React from 'react';
-import {OnSubmit, useForm} from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 import config from '../config';
 import useStores from '../hooks/useStores';
-import {Button, FormControl, TextField, Typography} from "@material-ui/core";
+import { Button, FormControl, TextField, Typography } from '@material-ui/core';
 
 export default function LoginScreen() {
     const { authStore } = useStores();
-    const { register, handleSubmit, watch, errors } = useForm();
-    const onSubmit = (data: Record<string, any>):void => {
-        console.log("Form data", data);
+    const { register, handleSubmit /*, watch, errors */ } = useForm();
+    const onSubmit = (data: Record<string, any>): void => {
+        console.log('Form data', data);
         //setShowSnackbar(false);
         authStore
             .loginEmailPassword(data.email, data.password)
@@ -24,11 +24,7 @@ export default function LoginScreen() {
         <div>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <FormControl>
-                    <TextField
-                        name="email"
-                        label="E-mail address"
-                        inputRef={register}
-                    />
+                    <TextField name="email" label="E-mail address" inputRef={register} />
                     <TextField
                         name="password"
                         label="Password"
@@ -36,7 +32,9 @@ export default function LoginScreen() {
                         autoComplete="current-password"
                         inputRef={register}
                     />
-                    <Button type="submit" color="primary" ref={register}>Login</Button>
+                    <Button type="submit" color="primary" ref={register}>
+                        Login
+                    </Button>
                     {/*<Button type="button" onClick={authStore.loginFacebook}>Facebook</Button>*/}
                     {/*<Button type="button" onClick={authStore.loginGoogle}>Login with Google</Button>*/}
 
@@ -48,4 +46,3 @@ export default function LoginScreen() {
         </div>
     );
 }
-

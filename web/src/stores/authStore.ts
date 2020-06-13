@@ -1,14 +1,14 @@
 import { observable, action, computed } from 'mobx';
-import axios, {AxiosInstance} from 'axios';
+import axios, { AxiosInstance } from 'axios';
 
-import config from '../config'
+import config from '../config';
 
 export default class AuthStore {
-    httpClient:AxiosInstance = axios.create({
+    httpClient: AxiosInstance = axios.create({
         baseURL: config.apiUrl,
     });
 
-    @observable apiToken: string = '';
+    @observable apiToken = '';
 
     @computed get isLoggedIn(): boolean {
         return !!this.apiToken;

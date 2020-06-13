@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Button } from '@material-ui/core'
+import { Typography, Button } from '@material-ui/core';
 
 import useStores from '../hooks/useStores';
 import Loading from '../components/Loading';

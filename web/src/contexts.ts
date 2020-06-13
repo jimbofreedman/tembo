@@ -1,11 +1,11 @@
 import React from 'react';
 import axios from 'axios';
-import {RouterStore} from "mobx-react-router";
+import { RouterStore } from 'mobx-react-router';
 
 import AuthStore from './stores/authStore';
 import ProfileStore from './stores/profileStore';
 
-import config from './config'
+import config from './config';
 
 console.log('API:', config.apiUrl);
 

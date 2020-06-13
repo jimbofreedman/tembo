@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import * as Sentry from '@sentry/browser';
-import config from "./config";
+import config from './config';
 
 if (config.sentryDSN) {
     Sentry.init({ dsn: config.sentryDSN });
