@@ -49,9 +49,9 @@ jobs:
           key: *web_cache_key
       - run: yarn install
       - save_cache:
-        key: *web_cache_key
-        paths:
-          - "node_modules"
+          key: *web_cache_key
+          paths:
+            - "node_modules"
       - run: yarn run lint
       - run: yarn run build
 #      - aws-s3/sync:
