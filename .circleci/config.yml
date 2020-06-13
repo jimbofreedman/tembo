@@ -1,4 +1,29 @@
-version: 2
+version: 2.1
+
+var_1: &docker_image circleci/python:2.7-node
+var_2: &checkout_code
+  checkout:
+    post: git pull --ff-only origin "refs/pull/${CI_PULL_REQUEST//*pull\//}/merge"
+var_3: &web_cache_key v2-{{ checksum "yarn.lock" }}
+var_4: &web_restore_cache
+  restore_cache:
+    key: *web_cache_key
+var_5: &web_save_cache
+  save_cache:
+    key: *web_cache_key
+    paths:
+      - "node_modules"
+var_6: &attach_workspace
+  attach_workspace:
+    at: .
+
+defaults: &job_defaults
+  docker:
+    - image: *docker_image
+
+orbs:
+  aws-s3: circleci/aws-s3@1.0.11
+
 jobs:
   build:
     working_directory: ~/app/backend
@@ -31,3 +56,47 @@ jobs:
       - store_artifacts:
           path: test-reports/
           destination: tr1
+
+  web-prepare:
+    <<: *job_defaults
+    steps:
+      - *checkout_code
+      - *web_restore_cache
+      - run: yarn install
+      - *web_save_cache
+      - persist_to_workspace:
+          root: .
+          paths:
+            - node_modules
+  web-lint:
+    <<: *job_defaults
+    steps:
+      - *checkout_code
+      - *attach_workspace
+      - run: yarn run lint
+
+  web-build:
+    <<: *job_defaults
+    steps:
+      - *checkout_code
+      - *attach_workspace
+      - run: yarn run build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - build
+
+  web-deploy:
+    <<: *job_defaults
+    steps:
+      - *checkout_code
+      - *attach_workspace
+      - aws-s3/sync:
+          from: build
+          to: 's3://mybucket/'
+          overwrite: true
+          aws-access-key-id: AWS_ACCESS_KEY
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          aws-region: AWS_DEFAULT_REGION
+          arguments: |
+            --cache-control "max-age=86400"
