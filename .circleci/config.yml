@@ -1,6 +1,9 @@
-version: 2
+version: 2.1
+
+var_1: &web_cache_key v2-{{ checksum "yarn.lock" }}
+
 jobs:
-  build:
+  build-backend:
     working_directory: ~/app/backend
     docker:
       - image: circleci/python:3.8.3
@@ -31,3 +34,46 @@ jobs:
       - store_artifacts:
           path: test-reports/
           destination: tr1
+
+  build-web:
+    docker:
+      - image: circleci/python:3.8.3-node
+    working_directory: ~/app/web
+    steps:
+      - checkout:
+          path: ~/app
+      - restore_cache:
+          key: *web_cache_key
+      - run: yarn install
+      - save_cache:
+          key: *web_cache_key
+          paths:
+            - "node_modules"
+#      - run: yarn run lint
+      - run: yarn run build
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - app/web/build
+
+
+  deploy-web:
+    docker:
+      - image: circleci/python:3.8.3-node
+    steps:
+      - attach_workspace:
+          at: .
+      - run: sudo npm install -g netlify-cli
+      - run:
+          name: Deploy to Netlify
+          command: netlify deploy --dir=app/web --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --prod
+
+workflows:
+  version: 2
+  build-test-and-deploy:
+    jobs:
+      - build-backend
+      - build-web
+      - deploy-web:
+          requires:
+            - build-web

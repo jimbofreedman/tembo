@@ -3,6 +3,6 @@ const config = {
     sentryDSN: process.env.REACT_APP_SENTRY_DSN,
 };
 
-console.log("Config", config);
+console.log('Config', config);
 
 export default config;
