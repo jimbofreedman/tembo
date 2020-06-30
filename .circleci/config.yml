@@ -58,7 +58,8 @@ jobs:
 
 
   deploy-web:
-    executor: node
+    docker:
+      - image: circleci/python:3.8.3-node
     steps:
       - attach_workspace:
           at: ./
