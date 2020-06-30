@@ -2,9 +2,6 @@ version: 2.1
 
 var_1: &web_cache_key v2-{{ checksum "yarn.lock" }}
 
-orbs:
-  aws-s3: circleci/aws-s3@1.0.11
-
 jobs:
   build-backend:
     working_directory: ~/app/backend
@@ -54,15 +51,6 @@ jobs:
             - "node_modules"
 #      - run: yarn run lint
       - run: yarn run build
-      - aws-s3/sync:
-          from: build
-          to: WEB_S3_BUCKET
-          overwrite: true
-          aws-access-key-id: AWS_ACCESS_KEY_ID
-          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-          aws-region: AWS_DEFAULT_REGION
-          arguments: |
-            --cache-control "max-age=86400"
 
 workflows:
   version: 2
