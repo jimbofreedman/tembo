@@ -62,7 +62,7 @@ jobs:
       - image: circleci/python:3.8.3-node
     steps:
       - attach_workspace:
-          at: project
+          at: .
       - run: sudo npm install -g netlify-cli
       - run:
           name: Deploy to Netlify
