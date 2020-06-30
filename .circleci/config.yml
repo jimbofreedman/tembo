@@ -70,7 +70,7 @@ jobs:
 
   deploy-native:
     docker:
-      - image: circleci/node:10.4.1
+      - image: circleci/node:14.4.0
     working_directory: ~/app/native
     steps:
       - checkout:
