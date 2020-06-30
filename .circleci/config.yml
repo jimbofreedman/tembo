@@ -63,13 +63,7 @@ jobs:
     steps:
       - attach_workspace:
           at: project
-      - restore_cache:
-          key: *web_cache_key
-      - run: yarn global add netlify-cli
-      - save_cache:
-          key: *web_cache_key
-          paths:
-            - "node_modules"
+      - run: npm install -g netlify-cli
       - run:
           name: Deploy to Netlify
           command: netlify deploy --dir=app/web --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --prod
