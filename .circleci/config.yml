@@ -51,6 +51,22 @@ jobs:
             - "node_modules"
 #      - run: yarn run lint
       - run: yarn run build
+      - persist_to_workspace:
+          paths:
+            - "build"
+
+
+  deploy-web:
+    executor: node
+    steps:
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Install netlify-cli
+          command: sudo npm install -g --silent netlify-cli
+      - run:
+          name: Deploy to Netlify
+          command: netlify deploy --dir=./build -p
 
 workflows:
   version: 2
