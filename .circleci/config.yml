@@ -60,16 +60,16 @@ jobs:
   deploy-web:
     docker:
       - image: circleci/python:3.8.3-node
-    working_directory: ~
     steps:
       - attach_workspace:
-          at: ~/
-      - run:
-          name: ls
-          command: ls
-      - run:
-          name: Install netlify-cli
-          command: sudo npm install -g --silent netlify-cli
+          at: project
+      - restore_cache:
+          key: *web_cache_key
+      - run: yarn global add netlify-cli
+      - save_cache:
+          key: *web_cache_key
+          paths:
+            - "node_modules"
       - run:
           name: Deploy to Netlify
           command: netlify deploy --dir=app/web --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --prod
