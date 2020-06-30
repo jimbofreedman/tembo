@@ -77,3 +77,5 @@ workflows:
       - build-backend
       - build-web
       - deploy-web
+        requires:
+          - build-web
