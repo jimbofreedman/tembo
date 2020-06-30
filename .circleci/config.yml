@@ -60,6 +60,7 @@ jobs:
   deploy-web:
     docker:
       - image: circleci/python:3.8.3-node
+    working_directory: ~
     steps:
       - attach_workspace:
           at: ~/
