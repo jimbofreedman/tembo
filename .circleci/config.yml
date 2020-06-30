@@ -62,7 +62,7 @@ jobs:
       - image: circleci/python:3.8.3-node
     steps:
       - attach_workspace:
-          at: ./
+          at: ~/
       - run:
           name: Install netlify-cli
           command: sudo npm install -g --silent netlify-cli
