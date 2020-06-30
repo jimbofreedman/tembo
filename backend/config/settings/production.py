@@ -211,6 +211,14 @@ sentry_sdk.init(
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+CORS_ORIGIN_WHITELIST = (
+    'https://tembo.netlify.app',
+)
+CSRF_TRUSTED_ORIGINS = (
+    'https://tembo.netlify.app',
+)
+CSRF_COOKIE_DOMAIN = 'tembo.herokuapp.com'
+
 SOCIAL_AUTH_FACEBOOK_KEY = env("SOCIAL_AUTH_FACEBOOK_KEY")
 SOCIAL_AUTH_FACEBOOK_SECRET = env("SOCIAL_AUTH_FACEBOOK_SECRET")
 
