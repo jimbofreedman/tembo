@@ -75,3 +75,4 @@ workflows:
     jobs:
       - build-backend
       - build-web
+      - deploy-web
