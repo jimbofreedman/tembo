@@ -68,6 +68,20 @@ jobs:
           name: Deploy to Netlify
           command: netlify deploy --dir=app/web --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --prod
 
+  deploy-native:
+    docker:
+      - image: circleci/node:14.4.0
+    working_directory: ~/app/native
+    steps:
+      - checkout:
+          path: ~/app
+      - run:
+          command: yarn install --frozen-lockfile
+      - run:
+          command: npx expo-cli login --non-interactive -u $EXPO_USERNAME
+      - run:
+          command: npx expo-cli publish --non-interactive --max-workers 1 --release-channel $EXPO_RELEASE_CHANNEL
+
 workflows:
   version: 2
   build-test-and-deploy:
@@ -77,3 +91,4 @@ workflows:
       - deploy-web:
           requires:
             - build-web
+      - deploy-native
