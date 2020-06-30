@@ -76,7 +76,7 @@ jobs:
       - checkout:
           path: ~/app
       - run:
-          command: npm ci
+          command: yarn install --frozen-lockfile
       - run:
           command: npx expo-cli login --non-interactive -u $EXPO_USERNAME
       - run:
