@@ -66,7 +66,7 @@ jobs:
       - run: sudo npm install -g netlify-cli
       - run:
           name: Deploy to Netlify
-          command: netlify deploy --dir=app/web --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --prod
+          command: netlify deploy --dir=app/web/build --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --prod
 
   deploy-native:
     docker:
