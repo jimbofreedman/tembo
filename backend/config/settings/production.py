@@ -14,7 +14,7 @@ from .base import env
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["tembo.freedman.io"])
+ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["chdemo.cerdio.com"])
 
 # DATABASES
 # ------------------------------------------------------------------------------
@@ -109,7 +109,7 @@ TEMPLATES[-1]["OPTIONS"]["loaders"] = [  # type: ignore[index] # noqa F405
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#default-from-email
 DEFAULT_FROM_EMAIL = env(
-    "DJANGO_DEFAULT_FROM_EMAIL", default="backend <noreply@tembo.freedman.io>"
+    "DJANGO_DEFAULT_FROM_EMAIL", default="backend <noreply@chdemo.cerdio.com>"
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#server-email
 SERVER_EMAIL = env("DJANGO_SERVER_EMAIL", default=DEFAULT_FROM_EMAIL)
@@ -212,12 +212,12 @@ sentry_sdk.init(
 # Your stuff...
 # ------------------------------------------------------------------------------
 CORS_ORIGIN_WHITELIST = (
-    'https://tembo.netlify.app',
+    'https://changa.netlify.app',
 )
 CSRF_TRUSTED_ORIGINS = (
-    'https://tembo.netlify.app',
+    'https://changa.netlify.app',
 )
-CSRF_COOKIE_DOMAIN = 'tembo.herokuapp.com'
+CSRF_COOKIE_DOMAIN = 'changa.herokuapp.com'
 
 SOCIAL_AUTH_FACEBOOK_KEY = env("SOCIAL_AUTH_FACEBOOK_KEY")
 SOCIAL_AUTH_FACEBOOK_SECRET = env("SOCIAL_AUTH_FACEBOOK_SECRET")
