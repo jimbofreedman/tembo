@@ -1,17 +1,19 @@
 import React from 'react';
 import axios from 'axios';
 import { RouterStore } from 'mobx-react-router';
+import { ResourceStore } from '@reststate/mobx';
 
 import AuthStore from './stores/authStore';
 import ProfileStore from './stores/profileStore';
 
 import config from './config';
+import FlightStore from "./stores/flightStore";
 
 console.log('API:', config.apiUrl);
 
 const httpClient = axios.create({
     baseURL: `${config.apiUrl}/api/`,
-    withCredentials: true,
+    // withCredentials: true,
 });
 
 const authStore = new AuthStore();
@@ -39,7 +41,7 @@ httpClient.interceptors.request.use(
                 ...config.headers,
                 'Content-Type': 'application/vnd.api+json',
                 Accept: 'application/vnd.api+json',
-                Authorization: `Token ${authStore.apiToken}`,
+                // Authorization: `Token ${authStore.apiToken}`,
             };
         }
         return config;
@@ -53,4 +55,9 @@ export default React.createContext({
     routingStore,
     authStore,
     profileStore: new ProfileStore(httpClient),
+    flightStore: new FlightStore(),
+    bookingStore: new ResourceStore({
+        name: 'bookings',
+        httpClient,
+    }),
 });
